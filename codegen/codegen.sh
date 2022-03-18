@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# TODO: use openapi generate spec from ergo repo
+
 SED_IFLAG=(-i'')
 ERGO_SPEC_VERSION=master
 GENERATOR_VERSION=v4.3.0
@@ -8,7 +10,6 @@ PACKAGE_NAME=ergo_rest
 
 GIT_USER_ID=ross-weir
 GIT_REPO_ID=go-ergo-rest
-  # -e GIT_USER_ID=${GIT_USER_ID} -e GIT_REPO_ID=${GIT_REPO_ID} \
 
 docker run --user "$(id -u):$(id -g)" --rm -v ${DIR}:/local \
   openapitools/openapi-generator-cli:${GENERATOR_VERSION} generate \
@@ -50,4 +51,4 @@ sed "${SED_IFLAG[@]}" 's/OneOfCommitmentWithSecretCommitmentSecretProven/interfa
 rm git_push.sh
 rm .travis.yml
 
-gofmt.exe -w *.go
+gofmt -w *.go
